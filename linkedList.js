@@ -59,6 +59,57 @@ export default class LinkedList {
     return null;
   }
 
+  insertAt(value, index) {
+    const listSize = this.size();
+
+    if (index < 0 || index > listSize) {
+      console.log("Index out of bound");
+      return null;
+    }
+
+    if (index === 0) {
+      this.prepend(value);
+      return;
+    }
+
+    if (index === listSize) {
+      this.append(value);
+      return;
+    }
+
+    const newNode = new Node(value);
+    const previousNode = this.at(index - 1);
+    newNode.nextNode = previousNode.nextNode;
+    previousNode.nextNode = newNode;
+  }
+
+  removeAt(index) {
+    const listSize = this.size();
+
+    if (index < 0 || index >= listSize) {
+      console.log("Index out of bound");
+      return null;
+    }
+
+    if (index === 0) {
+      const currentNode = this.head;
+      this.head = currentNode.nextNode;
+      if (this.head === null) this.tail = null;
+      currentNode.nextNode = null;
+      return;
+    }
+
+    const previousNode = this.at(index - 1);
+    const currentNode = previousNode.nextNode;
+    previousNode.nextNode = currentNode.nextNode;
+
+    if (currentNode === this.tail) {
+      this.tail = previousNode;
+    }
+
+    currentNode.nextNode = null;
+  }
+
   pop() {
     if (!this.head) return;
     if (this.head === this.tail) {

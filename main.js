@@ -10,3 +10,9 @@ list.append("snake");
 list.append("turtle");
 
 console.log(list.toString());
+
+list.insertAt("INSERTED NODE", 5);
+console.log(list.toString());
+
+list.removeAt(0);
+console.log(list.toString());
